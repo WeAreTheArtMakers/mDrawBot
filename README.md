@@ -16,6 +16,22 @@ Bu projeyi çalıştırmak için aşağıdaki malzemelere ihtiyacınız vardır:
 - Gerekli bağlantı kabloları ve güç kaynağı
 - (Opsiyonel) LCD ekran ve kontrol butonları
 
+## Gerekli Sürücüler
+
+### Mac ve Windows Kullanıcıları için CH34x Sürücü Kurulumu
+
+Mac işletim sistemi kullanıyorsanız ve Arduino'nuzu bilgisayarınıza bağladığınızda tanınmıyorsa, CH34x sürücüsünü yüklemeniz gerekebilir. Bu sürücü, Arduino'nun Mac ile uyumlu şekilde çalışmasını sağlar.
+
+Sürücüyü yüklemek için aşağıdaki adımları izleyin:
+
+1. [CH34x_Install_MAC_10_9_AND_ABOVE_V1_3.zip dosyasını indirin.
+2. İndirdiğiniz `.zip` dosyasını açın ve içindeki kurulum talimatlarını takip edin.
+3. Kurulum tamamlandıktan sonra bilgisayarınızı yeniden başlatın.
+4. Arduino'nuzu tekrar bağlayın ve tanınıp tanınmadığını kontrol edin.
+
+Bu sürücü yalnızca Mac OS X 10.9 ve üzeri sürümler için gereklidir. Eğer başka bir işletim sistemi kullanıyorsanız, bu adımı atlayabilirsiniz.
+
+
 ### Kurulum
 
 Projeyi kendi Arduino ortamınıza kurmak için aşağıdaki adımları izleyin:
@@ -25,6 +41,7 @@ Projeyi kendi Arduino ortamınıza kurmak için aşağıdaki adımları izleyin:
 3. `TinyStepper_28BYJ_48` ve `SD` kütüphanelerini Arduino IDE'ye yükleyin. Kütüphaneleri yüklemek için, Arduino IDE'de `Sketch > Include Library > Manage Libraries` menüsünü kullanabilirsiniz.
 4. Arduino'yu bilgisayarınıza bağlayın.
 5. İndirdiğiniz proje dosyasını Arduino IDE'ye yükleyin ve ardından `Upload` düğmesine basarak kodu Arduino'ya yükleyin.
+   
 
 ### Kullanım
 
