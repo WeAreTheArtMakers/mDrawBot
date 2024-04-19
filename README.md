@@ -63,6 +63,45 @@ Projeye katkıda bulunmak istiyorsanız, lütfen şunları yapın:
 Versiyon 1 Video
 [![Video İzle](https://wearetheartmakers.com/us/images/2024/04/18/mq3.jpg)](https://youtu.be/jPZAvzi2Hsk "Videoyu İzlemek İçin Tıklayın!")
 
+# Kalp Çizim Robotu <3 
+
+Bu proje, Arduino ve iki adet step motor kullanarak basit bir kalp şeklini çizmek üzere tasarlanmıştır. AccelStepper kütüphanesi kullanılarak motor hareketleri kontrol edilmekte ve belirli koordinatlar doğrultusunda kalp şekli çizilmektedir.
+
+## Donanım ve Bağlantılar
+
+Projede iki step motor kullanılmakta ve her motor için dört kontrol pinine ihtiyaç duyulmaktadır. Motorlar, Arduino'nun dijital pinlerine bağlanır:
+
+- **Motor 1 Pinleri:** 8, 9, 10, 11
+- **Motor 2 Pinleri:** 4, 5, 6, 7
+
+## Kurulum
+
+Projeyi çalıştırmadan önce, aşağıdaki adımları izleyerek motorları ve Arduino'yu ayarlayın:
+
+1. Arduino IDE'yi bilgisayarınıza kurun ve gerekli kütüphaneleri yükleyin.
+2. AccelStepper kütüphanesini yükleyin ve projenin kodunu Arduino'ya yükleyin.
+3. Motorları ve Arduino'yu uygun şekilde bağladığınızdan emin olun.
+
+## Yazılım
+
+Kod içerisinde iki `AccelStepper` nesnesi kullanılmaktadır (`stepperX` ve `stepperY`), bu nesneler motorların kontrolünü sağlamaktadır. Motorlar, FULL4WIRE modunda kullanılmaktadır.
+
+### Fonksiyonlar
+
+- `setup()`: Motorların maksimum hız ve ivme ayarlarını yapar.
+- `drawHeart()`: Kalp şeklini çizmek için motor hareketlerini sıralar.
+- `runMotors()`: Motorların hedef pozisyonlarına ulaşana kadar çalışmalarını sağlar.
+
+## Kullanım
+
+Arduino'yu bilgisayarınıza bağlayın ve kodu yükleyin. Arduino IDE üzerinden kodu doğrudan yükledikten sonra, cihazı güç kaynağına bağlayıp motorların bağlantılarını kontrol edin. Daha sonra sistemi başlatarak motorların kalp şeklini çizmesini izleyin.
+
+## Geliştirme
+
+Bu projeyi daha da geliştirmek isterseniz, motor hız ve ivmelenme ayarlarını değiştirebilir, daha karmaşık geometrik şekiller çizmek için koordinatları ayarlayabilirsiniz.
+
+
+
 ## Yardım ve Destek
 
 Projenizle ilgili daha fazla yardıma ihtiyacınız varsa, ChatGPT ile oluşturulmuş özel yardım botumuzu kullanabilirsiniz. mDrawBot'u kolayca kurmanıza ve kullanmanıza yardımcı olacak bu bot, sorularınıza hızlı cevaplar vermek için tasarlanmıştır.
