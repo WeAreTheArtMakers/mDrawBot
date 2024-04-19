@@ -43,6 +43,10 @@ Projeye katkıda bulunmak istiyorsanız, lütfen şunları yapın:
 4. Branch'ınıza push yapın (`git push origin feature/AmazingFeature`).
 5. Bir Pull Request oluşturun.
 
+Versiyon 1 Video
+[![MDRAW BOT V1 Video]([http://img.youtube.com/vi/YOUTUBE_VIDEO_ID/maxresdefault.jpg](https://i9.ytimg.com/vi/jPZAvzi2Hsk/mq3.jpg))](http://www.youtube.com/watch?v=jPZAvzi2Hsk "MDRAW BOT V1 Video")
+
+
 ## Lisans
 
 Bu proje MIT lisansı altında lisanslanmıştır - daha fazla bilgi için [LICENSE](LICENSE.md) dosyasına bakınız.
