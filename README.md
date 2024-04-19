@@ -44,7 +44,7 @@ Projeye katkıda bulunmak istiyorsanız, lütfen şunları yapın:
 5. Bir Pull Request oluşturun.
 
 Versiyon 1 Video
-[![MDRAW BOT V1 Video]([[http://img.youtube.com/vi/YOUTUBE_VIDEO_ID/maxresdefault.jpg](https://i9.ytimg.com/vi/jPZAvzi2Hsk/mq3.jpg](https://wearetheartmakers.com/us/images/2024/04/18/mq3.jpg)))](http://www.youtube.com/watch?v=jPZAvzi2Hsk "MDRAW BOT V1 Video")
+[![Video İzle](https://wearetheartmakers.com/us/images/2024/04/18/mq3.jpg)](https://youtu.be/jPZAvzi2Hsk "Videoyu İzlemek İçin Tıklayın!")
 
 
 ## Lisans
