@@ -46,6 +46,14 @@ Projeye katkıda bulunmak istiyorsanız, lütfen şunları yapın:
 Versiyon 1 Video
 [![Video İzle](https://wearetheartmakers.com/us/images/2024/04/18/mq3.jpg)](https://youtu.be/jPZAvzi2Hsk "Videoyu İzlemek İçin Tıklayın!")
 
+## Yardım ve Destek
+
+Projenizle ilgili daha fazla yardıma ihtiyacınız varsa, ChatGPT ile oluşturulmuş özel yardım botumuzu kullanabilirsiniz. mDrawBot'u kolayca kurmanıza ve kullanmanıza yardımcı olacak bu bot, sorularınıza hızlı cevaplar vermek için tasarlanmıştır.
+
+[mDrawBot Yardım Botunu Kullan](https://chat.openai.com/g/g-z5sewy5xD-watam-drawbot)
+
+Bu hizmeti kullanabilmek için bir ChatGPT üyeliğinizin olması gerekmektedir. Eğer henüz bir üyeliğiniz yoksa, [ChatGPT kayıt sayfası](https://chat.openai.com/signup) üzerinden kolayca kayıt olabilirsiniz.
+
 
 ## Lisans
 
