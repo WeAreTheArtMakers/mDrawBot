@@ -1,26 +1,44 @@
 # Çizim Robotu Projesi
 
-Bu depo, Arduino tabanlı bir çizim robotunun kaynak kodlarını içermektedir. Robot, G-code dosyalarını SD karttan okuyarak belirlenen desenleri bir yüzeye çizer.
+Bu depo, Arduino tabanlı bir çizim robotu olan mDrawBot'un kaynak kodlarını içermektedir. mDrawBOT Robotu, G-code dosyalarını SD karttan okuyarak belirlenen desenleri bir yüzeye çizer.
 
 ## Başlarken
 
-Bu bölümde, projeyi lokal ortamınıza klonlama ve çalıştırma adımları yer almaktadır.
+# mDrawBot Projesi
 
-### Önkoşullar
+mDrawBot, SD karttan Gcode dosyalarını okuyarak çizim yapan bir kart okuyucu modülü kullanır. Projede bazı parametrelerin montaj mesafeleri ölçüldükten sonra ayarlanması gerekmektedir.
 
-Bu projeyi çalıştırmak için aşağıdaki malzemelere ihtiyacınız vardır:
+## Kurulum
+
+Bu rehber, mDrawBot'un nasıl kurulacağı ve ayarlanacağı hakkında bilgiler içerir.
+
+### Gereksinimler
+
 - Arduino UNO
-- İki adet TinyStepper_28BYJ_48 adım motoru
-- SD kart modülü
-- Servo motor
-- Gerekli bağlantı kabloları ve güç kaynağı
-- (Opsiyonel) LCD ekran ve kontrol butonları
+- Stepper Motorlar
+- Servo Motor
+- SD Kart Okuyucu Modülü
+
+### Yükleme
+
+1. İlk olarak gerekli kütüphaneleri yükleyin:
+   - TinyStepper_28BYJ_48
+   - Servo
+   - SD
+     Bu kütüphaneleri TinyStepper_28BYJ_48 hariç arduino'nun içindende ootmatik olarak yükleyebilirsiniz.
+2. Arduino IDE üzerinden mDrawbot.ino kodunu Arduino'nunuza yükleyin.
+
+## Kullanım
+
+cihazı kullanmak için SD kartınıza Gcode formatındaki dosyayı WINDOWS bilgisayarlar için 1.nc MACOS işletim sistemlerinde 1.txt olarak SD karta kayıt edin, SD kartı arduinoya taktığınız ve mDrawBot.ino dosyasını Ardunio içine yükledikten sonra SD kartınızda olan (1.nc veya 1.txt) gcode'u otomatik olarak karta taktığınız an çizmeye başlayacak, çizim sırasında SD kartı çıkarırsanız çizim durur. 
 
 ## Gerekli Sürücüler
 
 ### Mac ve Windows Kullanıcıları için CH34x Sürücü Kurulumu
 
 Mac işletim sistemi kullanıyorsanız ve Arduino'nuzu bilgisayarınıza bağladığınızda tanınmıyorsa, CH34x sürücüsünü yüklemeniz gerekebilir. Bu sürücü, Arduino'nun Mac ile uyumlu şekilde çalışmasını sağlar.
+
+## MACOS işletim sistemi için gerekli arduino sürücüsü.
 
 Sürücüyü yüklemek için aşağıdaki adımları izleyin:
 
@@ -31,18 +49,16 @@ Sürücüyü yüklemek için aşağıdaki adımları izleyin:
 
 Bu sürücü yalnızca Mac OS X 10.9 ve üzeri sürümler için gereklidir. Eğer başka bir işletim sistemi kullanıyorsanız, bu adımı atlayabilirsiniz.
 
-
 ### Kurulum
 
 Projeyi kendi Arduino ortamınıza kurmak için aşağıdaki adımları izleyin:
 
 1. Arduino IDE'yi bilgisayarınıza kurun.
-2. Bu repo'yu klonlayın veya indirin.
+2. Bu repo'yu klonlayın veya indirin. (ana program mdrawnbot.ino
 3. `TinyStepper_28BYJ_48` ve `SD` kütüphanelerini Arduino IDE'ye yükleyin. Kütüphaneleri yüklemek için, Arduino IDE'de `Sketch > Include Library > Manage Libraries` menüsünü kullanabilirsiniz.
 4. Arduino'yu bilgisayarınıza bağlayın.
 5. İndirdiğiniz proje dosyasını Arduino IDE'ye yükleyin ve ardından `Upload` düğmesine basarak kodu Arduino'ya yükleyin.
    
-
 ### Kullanım
 
 Robotun çalışması için, G-code formatında çizim komutlarını içeren bir `.nc` dosyasını SD karta yükleyin ve Arduino'ya takın. Sistem otomatik olarak SD kartı okuyacak ve çizimi yapacaktır.
@@ -60,10 +76,10 @@ Projeye katkıda bulunmak istiyorsanız, lütfen şunları yapın:
 4. Branch'ınıza push yapın (`git push origin feature/AmazingFeature`).
 5. Bir Pull Request oluşturun.
 
+# Kalp Çizim Robotu <3 
+
 Versiyon 1 Video
 [![Video İzle](https://wearetheartmakers.com/us/images/2024/04/18/mq3.jpg)](https://youtu.be/jPZAvzi2Hsk "Videoyu İzlemek İçin Tıklayın!")
-
-# Kalp Çizim Robotu <3 
 
 Bu proje, Arduino ve iki adet step motor kullanarak basit bir kalp şeklini çizmek üzere tasarlanmıştır. AccelStepper kütüphanesi kullanılarak motor hareketleri kontrol edilmekte ve belirli koordinatlar doğrultusunda kalp şekli çizilmektedir.
 
@@ -96,13 +112,13 @@ Kod içerisinde iki `AccelStepper` nesnesi kullanılmaktadır (`stepperX` ve `st
 
 Arduino'yu bilgisayarınıza bağlayın ve kodu yükleyin. Arduino IDE üzerinden kodu doğrudan yükledikten sonra, cihazı güç kaynağına bağlayıp motorların bağlantılarını kontrol edin. Daha sonra sistemi başlatarak motorların kalp şeklini çizmesini izleyin.
 
+[![Versiyon 2 Video]([https://wearetheartmakers.com/us/images/2024/04/18/mq3.jpg](https://wearetheartmakers.com/us/images/2024/04/20/MDB.webp))](https://youtu.be/U4XFW1paGl4 "Videoyu İzlemek İçin Tıklayın!")
+
 ## Geliştirme
 
 Bu projeyi daha da geliştirmek isterseniz, motor hız ve ivmelenme ayarlarını değiştirebilir, daha karmaşık geometrik şekiller çizmek için koordinatları ayarlayabilirsiniz.
 
-
-
-## Yardım ve Destek
+## mDrawBot -  Destek
 
 Projenizle ilgili daha fazla yardıma ihtiyacınız varsa, ChatGPT ile oluşturulmuş özel yardım botumuzu kullanabilirsiniz. mDrawBot'u kolayca kurmanıza ve kullanmanıza yardımcı olacak bu bot, sorularınıza hızlı cevaplar vermek için tasarlanmıştır.
 
