@@ -112,7 +112,7 @@ Kod içerisinde iki `AccelStepper` nesnesi kullanılmaktadır (`stepperX` ve `st
 
 Arduino'yu bilgisayarınıza bağlayın ve kodu yükleyin. Arduino IDE üzerinden kodu doğrudan yükledikten sonra, cihazı güç kaynağına bağlayıp motorların bağlantılarını kontrol edin. Daha sonra sistemi başlatarak motorların kalp şeklini çizmesini izleyin.
 
-[![Video İzle]([https://wearetheartmakers.com/us/images/2024/04/18/mq3.jpg](https://wearetheartmakers.com/us/images/2024/04/20/MDB.webp))](https://youtu.be/jPZAvzi2Hsk "Videoyu İzlemek İçin Tıklayın!")
+[![Video İzle](https://wearetheartmakers.com/us/images/2024/04/20/MDB.webp)](https://youtu.be/jPZAvzi2Hsk "Videoyu İzlemek İçin Tıklayın!")
 
 ## Geliştirme
 
