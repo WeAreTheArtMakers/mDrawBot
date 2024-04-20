@@ -1,4 +1,4 @@
-# Çizim Robotu Projesi
+# mDrawBot - Çizim Robotu 
 
 Bu depo, Arduino tabanlı bir çizim robotu olan mDrawBot'un kaynak kodlarını içermektedir. mDrawBot, G-code dosyalarını SD karttan okuyarak belirlenen desenleri bir yüzeye çizer.
 
