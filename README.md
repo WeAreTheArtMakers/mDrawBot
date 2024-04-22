@@ -1,6 +1,6 @@
 # mDrawBot - Drawing Robot
 
-  [![gCode]([https://wearetheartmakers.com/us/images/2024/04/18/mq3.jpg](https://wearetheartmakers.com/us/images/2024/04/21/EF6EC96F-E291-4013-B949-BF9D26F6A7D6.jpg))]
+  ![mDrawBot](https://wearetheartmakers.com/us/images/2024/04/21/EF6EC96F-E291-4013-B949-BF9D26F6A7D6.jpg)
 
 
 This repository contains the source code for mDrawBot, an Arduino-based drawing robot. mDrawBot reads G-code files from an SD card and draws the specified patterns onto a surface. We are currently in the process of enhancing this project to include easy integration of an LCD screen.
