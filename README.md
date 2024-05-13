@@ -9,29 +9,99 @@ This repository contains the source code for mDrawBot, an Arduino-based drawing 
 
 ### Requirements
 
-- Arduino UNO
-- Stepper Motors
-- Servo Motor
-- SD Card Reader Module
-- LCD Screen (integration in development)
+## mDrawBot Duvar Çizim Robotu - Arduino 
+#### Gerekli Kütüphaneler
+Kodu çalıştırmadan önce aşağıdaki kütüphanelerin Arduino IDE'ye yüklenmiş olması gerekmektedir:
 
-### Setup
+- `TinyStepper_28BYJ_48`
+- `Servo`
+- `SD`
+- `U8x8lib`
 
-1. Install the required libraries:
-   - `TinyStepper_28BYJ_48`
-   - `Servo`
-   - `SD`
-   You can install these libraries automatically through the Arduino IDE.
-2. Load the `mDrawbot.ino` code onto your Arduino using the Arduino IDE.
+#### Donanım Bağlantısı
+- İki adet `28BYJ-48` adım motoru Arduino'ya bağlanır.
+- Servo motor, Arduino'nun belirli bir pinine bağlanır.
+- SD kart modülü, dosya okuma için Arduino'ya entegre edilir.
+- OLED ekran, kullanıcı arayüzü bilgilerini göstermek için kullanılır.
 
-### Usage
+### Kullanım
+Kod, Arduino üzerine yüklendikten sonra robot doğrudan kullanıma hazırdır. SD kart üzerine yüklenmiş G-kodları aracılığıyla çizim yapabilir.
 
-To use the device, load a Gcode formatted file onto your SD card:
-- For Windows computers, use `1.nc`
-- For MacOS operating systems, use `1.txt`
+### Fonksiyonlar
 
-When you insert the SD card into the Arduino, mDrawBot will automatically start drawing. If you remove the SD card during drawing, the drawing will stop.
+#### Motor Hareketleri
+- `moveTo(float x, float y)`: Belirtilen x, y koordinatlarına motoru hareket ettirir.
+- `line(float x, float y)`: İki nokta arasında düz bir çizgi çizer.
+- `arc(float cx, float cy, float r, float start_angle, float end_angle)`: Merkezi ve yarıçapı belirtilen bir yay çizer.
 
+#### Kalem Kontrolü
+- `pen_up()`: Kalemi kaldırır.
+- `pen_down()`: Kalemi indirir.
+
+#### SD Kart İşlemleri
+- `drawFile(String filename)`: SD kart üzerinden belirtilen dosya adındaki G-kodu okur ve çizimi başlatır.
+
+
+### Kullanıcı Arayüzü ve Kontroller
+
+#### OLED Ekran ve Menü Yapısı
+mDrawBot, kullanıcı dostu bir OLED ekran üzerinden çeşitli işlemleri kontrol etmenize olanak tanır. OLED ekran, çizim durumu, aktif mod ve sistem bilgileri gibi önemli bilgileri gösterir. Ekran menüsü, kullanıcıların robot ayarlarını kolayca yönetebilmesi için basit ve anlaşılır bir yapıdadır.
+
+#### Tuşlarla Kontrol
+Robot, çeşitli fonksiyonlara hızlı erişim sağlayan fiziksel tuşlarla donatılmıştır. Bu tuşlar sayesinde, menüler arasında gezinebilir, çizim işlemlerini başlatabilir veya durdurabilir ve ayarları değiştirebilirsiniz. Aşağıda tuşların işlevleri ve menüde nasıl kullanılacağı detaylandırılmıştır:
+
+- **Giriş (Enter) Tuşu**: Menü seçeneklerini onaylamak ve alt menülere girmek için kullanılır.
+- **Yukarı/Aşağı Tuşları**: Menü içerisinde seçenekler arasında gezinmek için kullanılır.
+- **İptal (ESC) Tuşu**: Bir önceki menüye geri dönmek veya bir işlemi iptal etmek için kullanılır.
+
+Elbette, özür dilerim! Kodda belirtilen menü yapısını ve tuş işlevlerini aşağıdaki gibi daha doğru bir şekilde yansıtacak şekilde düzenleyelim:
+
+### Menü İşlevleri ve Tuş Kontrolleri
+
+mDrawBot'un kullanıcı arayüzü, OLED ekran üzerinde ve belirli tuşlar aracılığıyla çeşitli işlemleri gerçekleştirebilirsiniz. Aşağıda, kodda belirtilen menü yapısını ve her bir tuşun işlevini açıklayan detayları bulabilirsiniz:
+
+#### Tuşlarla Kontrol
+Robotun kontrolü için kullanılan tuşlar ve her birinin işlevi şunlardır:
+- **Aşağı Tuşu (KEYDOWN)**: Menü seçenekleri arasında aşağı yönde hareket etmek için kullanılır.
+- **Giriş Tuşu (KEYENTER)**: Seçilen menü öğesini onaylar ve alt menülere girmek için kullanılır.
+- **İptal Tuşu (KEYESC)**: Bir önceki menüye dönme veya mevcut işlemi iptal etme için kullanılır.
+
+#### Menü Yapısı
+Kod içinde tanımlanan menü yapısı ve fonksiyonları şu şekildedir:
+
+1. **Ana Menü**: 
+   - Kullanıcıya çeşitli işlevler arasında seçim yapma imkanı tanır.
+   - Çizim başlatma, SD karttan çizim yükleme, Set Wall / Yukarı - Aşağı Ayar değiştirme gibi seçenekler sunar.
+
+2. **Çizim Başlatma / modART Demo Çalıştırma**:
+   - Önceden tanımlanmış bir demo çizim işlemini başlatır.
+   - Bu mod, robotun çizim kabiliyetlerini göstermek için idealdir.
+
+3. **SD Karttan Çizim Yükleme**:
+   - SD kart üzerindeki bir dosyayı yükler ve bu dosyada tanımlanan G-kodu çizim talimatlarına göre hareket eder.
+
+4. **Set Wall**:
+   - Robotun mevcut konumunu sıfırlar veya belirli bir konuma hareket ettirir.
+   - "Up Down" konumuna dönüş veya belirlenen bir yükseklik ve genişlikte yerleşim yapma seçenekleri içerir.
+
+Bu yapılandırmalar, kullanıcının robot üzerinde tam kontrol sahibi olmasını sağlar ve farklı çizim ihtiyaçlarına hızlı bir şekilde yanıt vermesine olanak tanır. README dosyasına bu bilgilerin eklenmesi, kullanıcıların cihazın nasıl kullanılacağını daha iyi anlamalarına yardımcı olacaktır.
+
+### Kurulum ve Kullanım
+Robotun kullanıma başlanması için gerekli adımlar ve tuş kombinasyonları, kullanıcıların cihazı hızla ve verimli bir şekilde kullanabilmeleri için detaylandırılmıştır. Kurulumdan sonra, kullanıcıların menüyü kullanarak cihaz üzerinde tam kontrol sağlamaları mümkündür.
+
+### Konfigürasyon
+Robotun çizim parametreleri ve mekanik ayarları, kod içerisindeki makrolar ve tanımlar aracılığıyla yapılandırılabilir.
+
+### Destek
+Herhangi bir sorunla karşılaşılması durumunda, [GitHub Issues](https://github.com/yourgithubusername/yourrepository/issues) üzerinden bir "issue" açarak destek isteyebilirsiniz.
+
+
+### Geliştiriciler
+Bu kod [WeAreTheArtMakers Studio](https://wearetheartmakers.com) tarafından geliştirilmiştir.
+
+---
+
+Kodu GitHub'da paylaşmak için bu README dosyasını kullanabilirsiniz. Ayrıca, kodu daha da geliştirerek ve kullanıcıların erişimine sunarak açık kaynak topluluğuna katkıda bulunabilirsiniz.
 ## Video Demonstrations
 
 - **Version 1 Video:**
