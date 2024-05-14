@@ -625,21 +625,21 @@ void loop() {
         switch (subcase) {
           case 1: {
             u8x8.clear();
-            u8x8.draw1x2String(0, 1, "- Demo 1");
-            u8x8.draw1x2String(0, 3, "  Demo 2");
-            u8x8.draw1x2String(0, 5, "  Demo 3");
+            u8x8.draw1x2String(0, 1, "- modDemoART 1");
+            u8x8.draw1x2String(0, 3, "  modDemoART 2");
+            u8x8.draw1x2String(0, 5, "  modDemoART 3");
           } break;
           case 2: {
             u8x8.clear();
-            u8x8.draw1x2String(0, 1, "  Demo 1");
-            u8x8.draw1x2String(0, 3, "- Demo 2");
-            u8x8.draw1x2String(0, 5, "  Demo 3");
+            u8x8.draw1x2String(0, 1, "  modDemoART 1");
+            u8x8.draw1x2String(0, 3, "- modDemoART 2");
+            u8x8.draw1x2String(0, 5, "  modDemoART 3");
           } break;
           case 3: {
             u8x8.clear();
-            u8x8.draw1x2String(0, 1, "  Demo 1");
-            u8x8.draw1x2String(0, 3, "  Demo 2");
-            u8x8.draw1x2String(0, 5, "- Demo 3");
+            u8x8.draw1x2String(0, 1, "  modDemoART 1");
+            u8x8.draw1x2String(0, 3, "  modDemoART 2");
+            u8x8.draw1x2String(0, 5, "- modDemoART 3");
           } break;
           default: break;
         }
