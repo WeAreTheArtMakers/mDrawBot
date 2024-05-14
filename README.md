@@ -113,6 +113,9 @@ Kodu GitHub'da paylaşmak için bu README dosyasını kullanabilirsiniz. Ayrıca
 - **Version 2 Video:**
   [![Watch Video](https://wearetheartmakers.com/us/images/2024/04/20/MDB.webp)](https://youtu.be/U4XFW1paGl4 "Click to Watch!")
 
+- **Version 3 Video:**
+  [![Watch Video](https://wearetheartmakers.com/mdrawbot/images/mDrawBotScreen.png)](https:// "VIDEO on the way...")
+
 ## Key Functions in mDrawBot.ino
 
 ### `setup()`
