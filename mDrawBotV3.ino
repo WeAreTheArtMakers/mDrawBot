@@ -211,7 +211,6 @@ static void teleport(float x, float y) {
 }
 
 
-
 //==========================================================
 // Eğik çizgi çizme programı
 int workcnt=0; // Çalışma sayacı
@@ -282,7 +281,6 @@ static void line_safe(float x, float y) {
   }
   moveto(x, y);  // Son adımda hedef noktaya tam olarak hareket et
 }
-
 
 
 void line(float x, float y) {
@@ -393,6 +391,7 @@ void drawfile(String filename) {
       }
     }
     myFile.close();  // Dosyayı kapat
+    beep(); // Melodi çal
   } else {
     u8x8.clear();
     u8x8.drawString(3, 3, "putARTinSD");  // Dosya bulunamazsa hata mesajı göster
@@ -460,145 +459,193 @@ int KeyCheck(void) {
 }
 
 
+// Melodiyi tanımla (notalar ve süreleri)
+int melody[] = {
+  262, 196, 196, 220, 196, 0, 247, 262
+};
+
+int noteDurations[] = {
+  4, 8, 8, 4, 4, 4, 4, 4
+};
+
 void beep(void) {
-  int i = 5;  // Bip sesinin tekrar sayısı
   m1.disableMotor();  // M1 motorunu devre dışı bırak
   m2.disableMotor();  // M2 motorunu devre dışı bırak
 
   if (!BEEP_SW) return;  // Eğer BEEP_SW (bip sesi anahtarı) kapalıysa fonksiyondan çık
 
-  while (i--) {  // 5 kez tekrarla
-    digitalWrite(BEEP, HIGH);  // BEEP pinini yüksek seviyeye çek (bip sesi çıkar)
-    delay(100);  // 300 milisaniye bekle
-    digitalWrite(BEEP, LOW);  // BEEP pinini düşük seviyeye çek (bip sesini durdur)
-    delay(200);  // 300 milisaniye daha bekle
+  // Melodiyi çal
+  for (int thisNote = 0; thisNote < 8; thisNote++) {
+    int noteDuration = 1000 / noteDurations[thisNote];
+    tone(BEEP, melody[thisNote], noteDuration);
+
+    int pauseBetweenNotes = noteDuration * 1.30;
+    delay(pauseBetweenNotes);
+    noTone(BEEP);
   }
 }
 
 
 void loop() {
-  int keyvalue=3;
-  int maincase=1;
+  int keyvalue = 3;
+  int maincase = 1;
+  int subcase = 1;
+  bool inModARTMenu = false;
   pen_up();
-  while(true)
-  {    
-    if(keyvalue!=0)
-    {
-      while(KeyCheck());
-      if(keyvalue==1)//select
-      {
-        //Serial.println((maincase));
-        if(maincase<10)
-        {
-          if(maincase<3) maincase++;
-          else maincase=1;
+
+  while (true) {
+    if (keyvalue != 0) {
+      while (KeyCheck());
+
+      if (keyvalue == 1) { // Select
+        if (!inModARTMenu) {
+          if (maincase < 10) {
+            if (maincase < 3) maincase++;
+            else maincase = 1;
+          } else if (maincase >= 30 && maincase <= 33) {
+            if (maincase == 33) maincase = 30;
+            else maincase++;
+          } else {
+            maincase = 30;
+          }
+        } else {
+          if (subcase < 3) subcase++;
+          else subcase = 1;
         }
-        else
-        {  
-          if(maincase==30) maincase=31;
-          //else if(maincase==31) maincase=32;
-          else maincase=30;
+      } else if (keyvalue == 2) { // Enter
+        if (!inModARTMenu) {
+          if (maincase == 1) {
+            inModARTMenu = true;
+            subcase = 1;
+          } else if (maincase == 2) {
+            // Start SD card process
+            if (!SD.begin(4)) {
+              // SD card initialization failed!
+              u8x8.clear();
+              u8x8.draw1x2String(0, 0, "Put SD Card!");
+              delay(2000);
+              u8x8.clear();
+            } else {
+              pen_up();
+              drawfile("main.nc");
+              u8x8.clear();
+            }
+          } else if (maincase == 30) {
+            moveto(0, 251);
+          } else if (maincase == 31) {
+            moveto(0, 0);
+          } else if (maincase == 32) {
+            moveto(-251, 0); // Move to the left
+          } else if (maincase == 33) {
+            moveto(251, 0); // Move to the right
+          } else {
+            maincase *= 10;
+            u8x8.clear();
+          }
+        } else {
+          if (subcase == 1) {
+            // Demo 1: Draw a circle
+            circle(0, 0, 50, 50);
+          } else if (subcase == 2) {
+            // Demo 2: Execute modART
+            modART();
+          } else if (subcase == 3) {
+            // Demo 3: Draw a heart curve
+            heart_curve(0, 0, 2, 2);
+          }
+          u8x8.clear();
+          inModARTMenu = false;
         }
-      }
-      else if(keyvalue==2)//Enter
-      {
-        if(maincase==1)
-        {
-          //执行DEMO  
-          working();
-          modART();
-          beep();
+      } else if (keyvalue == 3) { // ESC
+        if (!inModARTMenu) {
+          if (maincase > 9) {
+            maincase /= 10;
+          }
+          u8x8.clear();
+        } else {
+          inModARTMenu = false;
           u8x8.clear();
         }
-        else if(maincase==2)
-        {
-          // SD kart işlemi başlatılıyor
-          if (!SD.begin(4)) {
-            // SD kartın başlatılması başarısız oldu!
-            //Serial.println(F("initialization SD failed!"));
-            u8x8.clear();
-            u8x8.draw1x2String(0, 0, "Put SD Card!");
-            delay(2000);
-            u8x8.clear();
-          }
-          else
-          {            
-            pen_up();
-            drawfile("main.nc");
-            beep();
-            u8x8.clear();
-          }
-        }
-        else if(maincase==30)
-        {
-          moveto(0,251);
-        }
-        else if(maincase==31)
-        {
-          moveto(0,0);
-          
-        }
-        else
-        {
-          maincase*=10;
-          u8x8.clear(); 
-        }
       }
-      else if(keyvalue==3)//ESC
-      {
-        if(maincase>9)
-        {
-          maincase/=10;
+
+      if (!inModARTMenu) {
+        switch (maincase) {
+          case 1: {
+            u8x8.clear();
+            u8x8.draw1x2String(0, 1, "- modART Demo");
+            u8x8.draw1x2String(0, 3, "  SD CARD");
+            u8x8.draw1x2String(0, 5, "  SET WALL");
+          } break;
+          case 2: {
+            u8x8.clear();
+            u8x8.draw1x2String(0, 1, "  modART Demo");
+            u8x8.draw1x2String(0, 3, "- SD CARD");
+            u8x8.draw1x2String(0, 5, "  SET WALL");
+          } break;
+          case 3: {
+            u8x8.clear();
+            u8x8.draw1x2String(0, 1, "  modART Demo");
+            u8x8.draw1x2String(0, 3, "  SD CARD");
+            u8x8.draw1x2String(0, 5, "- SET WALL");
+          } break;
+          case 30: {
+            u8x8.clear();
+            u8x8.draw1x2String(0, 0, "- UP");
+            u8x8.draw1x2String(0, 2, "  DOWN");
+            u8x8.draw1x2String(0, 4, "  LEFT");
+            u8x8.draw1x2String(0, 6, "  RIGHT");
+          } break;
+          case 31: {
+            u8x8.clear();
+            u8x8.draw1x2String(0, 0, "  UP");
+            u8x8.draw1x2String(0, 2, "- DOWN");
+            u8x8.draw1x2String(0, 4, "  LEFT");
+            u8x8.draw1x2String(0, 6, "  RIGHT");
+          } break;
+          case 32: {
+            u8x8.clear();
+            u8x8.draw1x2String(0, 0, "  UP");
+            u8x8.draw1x2String(0, 2, "  DOWN");
+            u8x8.draw1x2String(0, 4, "- LEFT");
+            u8x8.draw1x2String(0, 6, "  RIGHT");
+          } break;
+          case 33: {
+            u8x8.clear();
+            u8x8.draw1x2String(0, 0, "  UP");
+            u8x8.draw1x2String(0, 2, "  DOWN");
+            u8x8.draw1x2String(0, 4, "  LEFT");
+            u8x8.draw1x2String(0, 6, "- RIGHT");
+          } break;
+          default: break;
         }
-        u8x8.clear();  
-      }
-      switch(maincase)
-      {
-        case 1:
-        {
-          u8x8.draw1x2String(0, 5, " ");
-          u8x8.draw1x2String(0, 1, "- modART Demo");
-          u8x8.draw1x2String(2, 3, "SD CARD");
-          u8x8.draw1x2String(2, 5, "SET WALL");
-        }break;
-        case 2:
-        {
-          u8x8.draw1x2String(0, 1, " ");
-          u8x8.draw1x2String(2, 1, "modART Demo");
-          u8x8.draw1x2String(0, 3, "- SD CARD");
-          u8x8.draw1x2String(2, 5, "SET");
-        }break;
-        case 3:
-        {
-          u8x8.draw1x2String(0, 3, " ");
-          u8x8.draw1x2String(2, 1, "modART Demo");
-          u8x8.draw1x2String(2, 3, "SD CARD");
-          u8x8.draw1x2String(0, 5, "- SET WALL");
-        }break;
-        case 30:
-        {
-          u8x8.draw1x2String(0, 0, "- UP");
-          u8x8.draw1x2String(0, 2, "  DOWN");
-        }break;
-        case 31:
-        {
-          u8x8.draw1x2String(0, 0, "  UP");
-          u8x8.draw1x2String(0, 2, "- DOWN");
-        }break;
-        case 32:
-        {
-          u8x8.draw1x2String(0, 0, "  UP");
-          u8x8.draw1x2String(0, 2, "  DOWN");
-        }break;
-        default:break;  
+      } else {
+        switch (subcase) {
+          case 1: {
+            u8x8.clear();
+            u8x8.draw1x2String(0, 1, "- Demo 1");
+            u8x8.draw1x2String(0, 3, "  Demo 2");
+            u8x8.draw1x2String(0, 5, "  Demo 3");
+          } break;
+          case 2: {
+            u8x8.clear();
+            u8x8.draw1x2String(0, 1, "  Demo 1");
+            u8x8.draw1x2String(0, 3, "- Demo 2");
+            u8x8.draw1x2String(0, 5, "  Demo 3");
+          } break;
+          case 3: {
+            u8x8.clear();
+            u8x8.draw1x2String(0, 1, "  Demo 1");
+            u8x8.draw1x2String(0, 3, "  Demo 2");
+            u8x8.draw1x2String(0, 5, "- Demo 3");
+          } break;
+          default: break;
+        }
       }
     }
-    keyvalue=KeyCheck();
+    keyvalue = KeyCheck();
   }
 }
 
-
-// Kalp şeklinde bir eğri çizer. Girdi parametreleri merkezin koordinatları ve XY eksenlerinde ölçeklendirme faktörleridir.
 void heart_curve(int xx, int yy, float x_scale, float y_scale) {
     float xa, ya;
     pen_up();
@@ -612,9 +659,9 @@ void heart_curve(int xx, int yy, float x_scale, float y_scale) {
         line_safe(xa + xx, ya + yy);  // Kalp şeklini çiz
     }
     pen_up();
+    beep(); // Melodi çal
 }
 
-// Verilen merkez noktasından belirli bir açıyla dikdörtgen çizer.
 void rectangle(float xx, float yy, float dx, float dy, float angle) {
     float six, csx, siy, csy;
     dx /= 2;
@@ -635,8 +682,6 @@ void rectangle(float xx, float yy, float dx, float dy, float angle) {
     pen_up();
 }
 
-//BASİT DİKDÖRTGEN ÇİZME FONKSİYONU
-// Verilen başlangıç noktasından belirli boyutlarda dikdörtgen çizer.
 void box(float xx, float yy, float dx, float dy) {
     pen_up();
     line_safe(xx, yy);
@@ -652,8 +697,6 @@ void box(float xx, float yy, float dx, float dy) {
     pen_up();
 }
 
-
-// Verilen merkez noktasından belirli yarıçaplarla daire çizer.
 void circle(float xx, float yy, float radius_x, float radius_y) {
     float rx, ry;
     float st = 3.14159 / 90; // Daireyi parçalara ayırma hassasiyeti
@@ -666,10 +709,9 @@ void circle(float xx, float yy, float radius_x, float radius_y) {
         line(xx + rx, yy + ry);
     }
     pen_up();
+    beep(); // Melodi çal
 }
 
-
-// Çeşitli geometrik şekilleri çizmek için demo fonksiyonu.
 void modART() {
     pen_up();
     box(-45, 0, 90, 90);
@@ -703,8 +745,6 @@ void modART() {
     box(17.5, 2.5, 25, 25);
 
     heart_curve(-45, -45, 2, 2);
-
+    beep(); // Melodi çal
 }
-
-
 
