@@ -211,6 +211,7 @@ static void teleport(float x, float y) {
 }
 
 
+
 //==========================================================
 // Eğik çizgi çizme programı
 int workcnt=0; // Çalışma sayacı
@@ -281,6 +282,7 @@ static void line_safe(float x, float y) {
   }
   moveto(x, y);  // Son adımda hedef noktaya tam olarak hareket et
 }
+
 
 
 void line(float x, float y) {
@@ -391,7 +393,6 @@ void drawfile(String filename) {
       }
     }
     myFile.close();  // Dosyayı kapat
-    beep(); // Melodi çal
   } else {
     u8x8.clear();
     u8x8.drawString(3, 3, "putARTinSD");  // Dosya bulunamazsa hata mesajı göster
@@ -459,29 +460,18 @@ int KeyCheck(void) {
 }
 
 
-// Melodiyi tanımla (notalar ve süreleri)
-int melody[] = {
-  262, 196, 196, 220, 196, 0, 247, 262
-};
-
-int noteDurations[] = {
-  4, 8, 8, 4, 4, 4, 4, 4
-};
-
 void beep(void) {
+  int i = 5;  // Bip sesinin tekrar sayısı
   m1.disableMotor();  // M1 motorunu devre dışı bırak
   m2.disableMotor();  // M2 motorunu devre dışı bırak
 
   if (!BEEP_SW) return;  // Eğer BEEP_SW (bip sesi anahtarı) kapalıysa fonksiyondan çık
 
-  // Melodiyi çal
-  for (int thisNote = 0; thisNote < 8; thisNote++) {
-    int noteDuration = 1000 / noteDurations[thisNote];
-    tone(BEEP, melody[thisNote], noteDuration);
-
-    int pauseBetweenNotes = noteDuration * 1.30;
-    delay(pauseBetweenNotes);
-    noTone(BEEP);
+  while (i--) {  // 5 kez tekrarla
+    digitalWrite(BEEP, HIGH);  // BEEP pinini yüksek seviyeye çek (bip sesi çıkar)
+    delay(100);  // 300 milisaniye bekle
+    digitalWrite(BEEP, LOW);  // BEEP pinini düşük seviyeye çek (bip sesini durdur)
+    delay(200);  // 300 milisaniye daha bekle
   }
 }
 
@@ -528,6 +518,7 @@ void loop() {
             } else {
               pen_up();
               drawfile("main.nc");
+              beep();
               u8x8.clear();
             }
           } else if (maincase == 30) {
@@ -553,6 +544,7 @@ void loop() {
             // Demo 3: Draw a heart curve
             heart_curve(0, 0, 2, 2);
           }
+          beep();
           u8x8.clear();
           inModARTMenu = false;
         }
@@ -659,7 +651,6 @@ void heart_curve(int xx, int yy, float x_scale, float y_scale) {
         line_safe(xa + xx, ya + yy);  // Kalp şeklini çiz
     }
     pen_up();
-    beep(); // Melodi çal
 }
 
 void rectangle(float xx, float yy, float dx, float dy, float angle) {
@@ -709,7 +700,6 @@ void circle(float xx, float yy, float radius_x, float radius_y) {
         line(xx + rx, yy + ry);
     }
     pen_up();
-    beep(); // Melodi çal
 }
 
 void modART() {
@@ -745,6 +735,4 @@ void modART() {
     box(17.5, 2.5, 25, 25);
 
     heart_curve(-45, -45, 2, 2);
-    beep(); // Melodi çal
 }
-
