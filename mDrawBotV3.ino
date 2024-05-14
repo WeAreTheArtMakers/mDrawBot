@@ -475,6 +475,17 @@ void beep(void) {
   }
 }
 
+void simpleBeep() {
+    int durations[] = {100, 200, 100, 200, 100, 200, 100, 200}; // Bip süreleri (milisaniye cinsinden)
+    for (int i = 0; i < 8; i++) {
+        digitalWrite(BEEP, HIGH); // Buzzer'ı aç
+        delay(durations[i]); // Süre kadar bekle
+        digitalWrite(BEEP, LOW); // Buzzer'ı kapat
+        delay(durations[i]); // Süre kadar bekle
+    }
+}
+
+
 
 void loop() {
   int keyvalue = 3;
@@ -518,7 +529,7 @@ void loop() {
             } else {
               pen_up();
               drawfile("main.nc");
-              beep();
+              simpleBeep();
               u8x8.clear();
             }
           } else if (maincase == 30) {
