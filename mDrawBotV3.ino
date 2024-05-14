@@ -348,16 +348,6 @@ void animateModDrawing() {
   }
 }
 
-// SD KART KONTROL 
-void checkSDCard() {
-    if (!SD.begin()) {
-        Serial.println("SD Kart Takılı Değil!");
-        // Ekran veya LED ile kullanıcıya bilgi verilebilir
-    } else {
-        Serial.println("SD Kart Hazır.");
-    }
-}
-
 
 //------------------------------------------------------------------------------
 // Çalışma durumunu OLED ekranda gösterir.
@@ -374,22 +364,30 @@ void working(void) {
 
 //------------------------------------------------------------------------------
 // Belirtilen dosya isminden çizim yapar.
-void drawfile(String filename) {
+void drawfile(String filename) 
+{
   String rd = "";
-  int line = 0;
-  char rr = 0;
+  int line=0;
+  char rr=0;
   myFile = SD.open(filename);  // SD karttan dosyayı aç
   if (myFile) {
+    //Serial.println(F("] Opened"));
     working();  // Çalışma durumunu göster
     while (myFile.available()) {  // Dosya sonuna kadar oku
-      rr = myFile.read();  // Bir karakter oku
+      rr=myFile.read();  // Bir karakter oku
 
-      if (rr == char(10)) {  // Eğer satır sonu karakteriyse
+      if (rr == char(10)) 
+      {  // Eğer satır sonu karakteriyse
         line++;
+           //          Serial.print(F("Run nc #"));
+            //          Serial.print(line);
+              //          Serial.println(" : "+rd);  
+
+
         nc(rd);  // Okunan satırı NC işlem fonksiyonuna gönder
-        rd = "";
+        rd="";
       } else {
-        rd += rr;  // Okunan karakteri satır sonuna kadar ekle
+        rd+=rr;  // Okunan karakteri satır sonuna kadar ekle
       }
     }
     myFile.close();  // Dosyayı kapat
@@ -408,7 +406,7 @@ void setup() {
   digitalWrite(BEEP, LOW); // Başlangıçta BEEP pinini düşük seviyeye (kapalı) ayarla.
   u8x8.begin(); // U8x8 kütüphanesi ile ekran başlatılıyor.
   u8x8.setFont(u8x8_font_amstrad_cpc_extended_r); // Ekran için font ayarlanıyor.
-  u8x8.draw1x2String(1, 3, "-- mDrawBOT --"); // Ekranın 1,3 konumuna "Hoş Geldiniz!" mesajını yaz.
+  u8x8.draw1x2String(1, 3, "-- mDrawBOT --"); // Ekranın 1,3 konumuna "mDrawBot!" mesajını yaz.
  
 
 
@@ -427,7 +425,7 @@ void setup() {
   teleport(0, 0); // Çizim başlangıç noktasını (0,0) olarak ayarla.
   mode_scale = 1; // Çizim ölçeklendirmesini 1 olarak ayarla (varsayılan, ölçeklendirme yok).
   
-  delay(1000); // 1 saniye bekle
+  delay(1500); // 1 saniye bekle
   u8x8.clear();  // Ekranı temizle
 }
 
@@ -476,7 +474,7 @@ void beep(void) {
 }
 
 void simpleBeep() {
-    int durations[] = {100, 200, 100, 200, 100, 200, 100, 200}; // Bip süreleri (milisaniye cinsinden)
+    int durations[] = {50, 100, 50, 100, 50, 100, 50, 100}; // Bip süreleri (milisaniye cinsinden)
     for (int i = 0; i < 8; i++) {
         digitalWrite(BEEP, HIGH); // Buzzer'ı aç
         delay(durations[i]); // Süre kadar bekle
@@ -534,12 +532,16 @@ void loop() {
             }
           } else if (maincase == 30) {
             moveto(0, 251);
+            simpleBeep();
           } else if (maincase == 31) {
             moveto(0, 0);
+            simpleBeep();
           } else if (maincase == 32) {
             moveto(-251, 0); // Move to the left
+            simpleBeep();
           } else if (maincase == 33) {
             moveto(251, 0); // Move to the right
+            simpleBeep();
           } else {
             maincase *= 10;
             u8x8.clear();
@@ -548,12 +550,15 @@ void loop() {
           if (subcase == 1) {
             // Demo 1: Draw a circle
             circle(0, 0, 50, 50);
+            beep();
           } else if (subcase == 2) {
             // Demo 2: Execute modART
             modART();
+            beep();
           } else if (subcase == 3) {
             // Demo 3: Draw a heart curve
             heart_curve(0, 0, 2, 2);
+            beep();
           }
           beep();
           u8x8.clear();
@@ -625,21 +630,21 @@ void loop() {
         switch (subcase) {
           case 1: {
             u8x8.clear();
-            u8x8.draw1x2String(0, 1, "- modDemoART 1");
-            u8x8.draw1x2String(0, 3, "  modDemoART 2");
-            u8x8.draw1x2String(0, 5, "  modDemoART 3");
+            u8x8.draw1x2String(0, 1, "- modCircle");
+            u8x8.draw1x2String(0, 3, "  modDemoART");
+            u8x8.draw1x2String(0, 5, "  modHeart");
           } break;
           case 2: {
             u8x8.clear();
-            u8x8.draw1x2String(0, 1, "  modDemoART 1");
-            u8x8.draw1x2String(0, 3, "- modDemoART 2");
-            u8x8.draw1x2String(0, 5, "  modDemoART 3");
+            u8x8.draw1x2String(0, 1, "  modCircle");
+            u8x8.draw1x2String(0, 3, "- modDemoART");
+            u8x8.draw1x2String(0, 5, "  modHeart");
           } break;
           case 3: {
             u8x8.clear();
-            u8x8.draw1x2String(0, 1, "  modDemoART 1");
-            u8x8.draw1x2String(0, 3, "  modDemoART 2");
-            u8x8.draw1x2String(0, 5, "- modDemoART 3");
+            u8x8.draw1x2String(0, 1, "  modCircle");
+            u8x8.draw1x2String(0, 3, "  modDemoART");
+            u8x8.draw1x2String(0, 5, "- modHeart");
           } break;
           default: break;
         }
