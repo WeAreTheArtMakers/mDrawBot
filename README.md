@@ -114,10 +114,10 @@ Kodu GitHub'da paylaşmak için bu README dosyasını kullanabilirsiniz. Ayrıca
   [![Watch Video](https://wearetheartmakers.com/us/images/2024/04/20/MDB.webp)](https://youtu.be/U4XFW1paGl4 "Click to Watch!")
 
 - **Version 3 Video:**
-  [![Watch Video](https://wearetheartmakers.com/us/images/2024/05/15/IMG_1029.jpg)]([https://youtu.be/3B-gio2D2eI]( "VIDEO on the way...")
+  [![Watch Video](https://wearetheartmakers.com/us/images/2024/05/15/IMG_1029.jpg)](https://youtu.be/3B-gio2D2eI "Click to Watch!")
 
 - **Menü :**
-  [![Watch Video](https://wearetheartmakers.com/us/images/2024/05/13/mDrawBotScreen.png)]([https://youtu.be/V1fwPMATSuQ]( " oled menu")
+  [![Watch Video](https://wearetheartmakers.com/us/images/2024/05/13/mDrawBotScreen.png)](https://youtu.be/V1fwPMATSuQ "oled menu")
 
 
 
