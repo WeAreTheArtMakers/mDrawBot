@@ -57,11 +57,9 @@ Robot, çeşitli fonksiyonlara hızlı erişim sağlayan fiziksel tuşlarla dona
 - **Yukarı/Aşağı Tuşları**: Menü içerisinde seçenekler arasında gezinmek için kullanılır.
 - **İptal (ESC) Tuşu**: Bir önceki menüye geri dönmek veya bir işlemi iptal etmek için kullanılır.
 
-Elbette, özür dilerim! Kodda belirtilen menü yapısını ve tuş işlevlerini aşağıdaki gibi daha doğru bir şekilde yansıtacak şekilde düzenleyelim:
-
 ### Menü İşlevleri ve Tuş Kontrolleri
 
-mDrawBot'un kullanıcı arayüzü, OLED ekran üzerinde ve belirli tuşlar aracılığıyla çeşitli işlemleri gerçekleştirebilirsiniz. Aşağıda, kodda belirtilen menü yapısını ve her bir tuşun işlevini açıklayan detayları bulabilirsiniz:
+mDrawBot'un kullanıcı arayüzü, OLED ekran üzerinde ve belirli tuşlar aracılığıyla çeşitli işlemleri gerçekleştirebilirsiniz. Aşağıda, kodda belirtilen menü yapısını ve her bir tuşun işlevini açıklayan detaylar.
 
 #### Tuşlarla Kontrol
 Robotun kontrolü için kullanılan tuşlar ve her birinin işlevi şunlardır:
