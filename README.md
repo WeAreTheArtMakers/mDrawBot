@@ -5,11 +5,12 @@
 
 This repository contains the source code for mDrawBot, an Arduino-based drawing robot. mDrawBot reads G-code files from an SD card and draws the specified patterns onto a surface. We are currently in the process of enhancing this project to include easy integration of an LCD screen.
 
-## Getting Started
-
-### Requirements
-
 ## mDrawBot Duvar Çizim Robotu - Arduino 
+
+## Başlarken
+
+## mdrawBot 3D Model ( Open Source ).stl dosyasını indirip 3D yazıcıdan istediğiniz malzeme ile mDrawBot robotu basarak çizim robotunuzun iskeleti oluşturabilirisiz. Daha iyi tasarım çözümleri için lütfen STL dosyasını geliştirin. 
+
 #### Gerekli Kütüphaneler
 Kodu çalıştırmadan önce aşağıdaki kütüphanelerin Arduino IDE'ye yüklenmiş olması gerekmektedir:
 
